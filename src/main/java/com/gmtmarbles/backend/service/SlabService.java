@@ -18,4 +18,30 @@ public class SlabService {
     public List<Slab> getAllSlabs() {
         return slabRepository.findAll();
     }
+    public Slab createSlab(Slab slab) {
+        return slabRepository.save(slab);
+    }
+    public Slab getSlabById(Long id) {
+        return slabRepository.findById(id).orElse(null);
+    }
+    public Slab updateSlab(Long id, Slab updatedSlab) {
+        Slab existingSlab = slabRepository.findById(id).orElse(null);
+
+        if (existingSlab == null) {
+            return null;
+        }
+
+        existingSlab.setSlabCode(updatedSlab.getSlabCode());
+        existingSlab.setMaterial(updatedSlab.getMaterial());
+        existingSlab.setLength(updatedSlab.getLength());
+        existingSlab.setWidth(updatedSlab.getWidth());
+        existingSlab.setThickness(updatedSlab.getThickness());
+        existingSlab.setPurchasePrice(updatedSlab.getPurchasePrice());
+        existingSlab.setStatus(updatedSlab.getStatus());
+
+        return slabRepository.save(existingSlab);
+    }
+    public void deleteSlab(Long id) {
+        slabRepository.deleteById(id);
+    }
 }
