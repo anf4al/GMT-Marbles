@@ -1,11 +1,13 @@
 package com.gmtmarbles.backend.service;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.gmtmarbles.backend.entity.Slab;
+import com.gmtmarbles.backend.entity.SlabStatus;
 import com.gmtmarbles.backend.repository.SlabRepository;
-
-import java.util.List;
 
 @Service
 public class SlabService {
@@ -17,6 +19,18 @@ public class SlabService {
     }
     public List<Slab> getAllSlabs() {
         return slabRepository.findAll();
+    }
+    public List<Slab> getSlabsByStatus(SlabStatus status) {
+        return slabRepository.findByStatus(status);
+    }
+    public List<Slab> getSlabsByMaterial(String material) {
+        return slabRepository.findByMaterial(material);
+    }
+    public List<Slab> getSlabsBySlabCode(String slabCode) {
+        return slabRepository.findBySlabCode(slabCode);
+    }
+    public List<Slab> getSlabsByPurchasePriceBetween(BigDecimal min, BigDecimal max) {
+        return slabRepository.findByPurchasePriceBetween(min, max);
     }
     public Slab createSlab(Slab slab) {
         return slabRepository.save(slab);
